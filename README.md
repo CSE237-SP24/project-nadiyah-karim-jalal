@@ -13,6 +13,7 @@ what user stories do you intend to complete next iteration?
 
 is there anything that you implemented but doesn't currently work?
 - our script runs the program but has issues accessing our class in our code
+
 what commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
 - we have provided a script (script.sh) that allows users to run our program. You can call this script by using the command ‘./script.sh’. Running this script runs into errors, thought, that we plan to address in iteration two.
 
