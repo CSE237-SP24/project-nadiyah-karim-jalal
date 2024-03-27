@@ -1,6 +1,6 @@
 # base-project
 
-#iteration one
+# iteration one
 
 what user stories were completed this iteration?
 - users can deposit money into an account 
