@@ -3,8 +3,8 @@
 #iteration one
 
 what user stories were completed this iteration?
-> users can deposit money into an account 
-> users can withdraw money from an account
+- users can deposit money into an account 
+- users can withdraw money from an account
 what user stories do you intend to complete next iteration?
 > users will be able to create multiple accounts whose information is stored/saved
 > user should not be able to withdraw and transfer money that they do not have
