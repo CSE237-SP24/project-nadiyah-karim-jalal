@@ -11,8 +11,6 @@ public class Menu {
 	public static void main(String[] args) {
 		Menu mainMenu = new Menu();
 		mainMenu.displayingOptions();
-		double amount = mainMenu.getValidUserInput();
-		mainMenu.processingUserSelection(amount);
 	}
 	
 	//Constructor
@@ -23,7 +21,23 @@ public class Menu {
 	
 	//Code that just displays stuff - no tests needed
 	public void displayingOptions() {
-		System.out.println("How much money do you want to deposit?");
+		System.out.println("Would you like to Deposit (1) or Withdraw (2) money? (Enter 1 or 2)?");
+		int choice = in.nextInt();
+		while (choice != 1 && choice != 2) {
+			System.out.println("Invalid, please enter 1 for Deposit or 2 for Withdraw.");
+			choice = in.nextInt();
+		}
+		//Deposit
+		if (choice == 1){
+			System.out.println("How much money do you want to deposit?");
+		}
+		else if (choice == 2){
+			System.out.println("How much money do you want to withdraw?");
+		}
+
+		double amount = getValidUserInput();
+		processingUserSelection(amount, choice != 1);
+
 	}
 	
 	//Code that gets user input
@@ -39,9 +53,25 @@ public class Menu {
 	}
 	
 	//Does work - needs tests
-	public void processingUserSelection(double amount) {
-		account.deposit(amount);
-		System.out.println("Your balance is now: " + account.getBalance());
+	public void processingUserSelection(double amount, boolean actionType) {
+		//Withdraw
+		if (actionType) { 
+			try {
+				account.withdraw(amount);
+				System.out.println("Withdraw Successful. Your balance is now:" + account.getBalance());
+			} catch (IllegalArgumentException e) { 
+				System.out.println("Withdraw Failed");
+			}	
+		} 
+		//Deposit
+		else { 
+			try {
+				account.deposit(amount);
+				System.out.println("Deposit Successful. Your balance is now:" + account.getBalance());
+			} catch (IllegalArgumentException e) { 
+				System.out.println("Deposit Failed");
+			}
+		}
 	}
 	
 	public BankAccount getAccount() {
