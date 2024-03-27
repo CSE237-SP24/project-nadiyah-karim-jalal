@@ -1,4 +1,4 @@
-# base-project
+# NKJA bank application project
 
 # iteration one
 
