@@ -6,8 +6,8 @@ public class BankAccount {
 	private String name;
 	
 	//Constructors - not tested
-	public BankAccount(String name) {
-		this.balance = 0;
+	public BankAccount(String name, double balance) {
+		this.balance = balance;
 		this.name = name;
 	}
 	
