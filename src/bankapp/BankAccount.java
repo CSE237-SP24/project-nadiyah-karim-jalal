@@ -18,7 +18,7 @@ public class BankAccount {
 	}
     
 	//public method doing some work - lots of tests
-	public void withdraw(double amount) { 
+	public void validBalance(double amount) { 
 		if (amount > this.balance) { 
 			throw new IllegalArgumentException("Insufficient balance");
 		}
@@ -28,8 +28,23 @@ public class BankAccount {
 		this.balance -= amount;
 	}
 	
+	public double withdraw(double amount) { 
+		validBalance(amount);
+		this.balance -= amount;
+	
+		return amount;
+	}
+	
 	//getters and setters - not tested
 	public double getBalance() {
 		return this.balance;
 	}
+	
+	
+	public double cashOut() {
+		return this.withdraw(this.balance);
+	}
+	
+	
+
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import bankapp.BankAccount;
 
 class BankAccountTests {
-
+	BankAccount testAccount = new BankAccount();
 	@Test
 	void testSimpleDeposit() {
 		//1. Setup Objects
@@ -34,6 +34,12 @@ class BankAccountTests {
 			//we expect to end up here, -25 is a bad input
 			assertTrue(true);
 		}
+	}
+	
+	@Test
+	void testCashOut() {
+		assertEquals(initialBalance, testAccount.cashOut(), 0.01);
+		assertEquals(0, testAccount.getBalance(), 0.01);
 	}
 
 }
