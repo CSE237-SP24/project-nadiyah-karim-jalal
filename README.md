@@ -1,5 +1,5 @@
 # NJKA Bank Application Project :bank:
-### Team Members:
+### Team Members :busts_in_silhouette: :
 **N**adiyah Ahmad, **J**alal Abdul-Yahaya, **K**arim Zaggoti, & **A**nders Pesti
 ### Project Description:
 - to be continued...
