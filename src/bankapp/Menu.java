@@ -36,22 +36,32 @@ public class Menu {
 	
 	//Code that just displays stuff - no tests needed
 	public void displayingOptions() {
-		System.out.println("Would you like to Deposit (1) or Withdraw (2) money? (Enter 1 or 2)?");
-		int choice = in.nextInt();
-		while (choice != 1 && choice != 2) {
-			System.out.println("Invalid, please enter 1 for Deposit or 2 for Withdraw.");
+		boolean continueRunning = true;
+		while (continueRunning) { 
+			System.out.println("Would you like to Deposit (1), Withdraw (2), or Exit (3)? (Enter 1, 2, or 3)");
+			int choice = in.nextInt();
+			while (choice < 1 || choice > 3) {
+			System.out.println("Invalid, please enter 1 for Deposit or 2 for Withdraw, or 3 to Exit.");
 			choice = in.nextInt();
-		}
-		//Deposit
-		if (choice == 1){
+			}
+
+			if (choice == 3) {
+				System.out.println("Exiting program. Goodbye!");
+				continueRunning = false;
+				continue;  //end the session
+			}
+
+			//Deposit
+			if (choice == 1){
 			System.out.println("How much money do you want to deposit?");
-		}
-		else if (choice == 2){
+			}
+			else if (choice == 2){
 			System.out.println("How much money do you want to withdraw?");
-		}
+			}
 
 		double amount = getValidUserInput();
 		processingUserSelection(amount, choice != 1);
+		}
 
 	}
 	
