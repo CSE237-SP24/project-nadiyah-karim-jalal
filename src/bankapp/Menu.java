@@ -87,6 +87,7 @@ public class Menu {
 				System.out.println("Deposit Failed");
 			}
 		}
+	}
 
 	// In progress: Ask the user for their name to be associated with the account
 	public String getUserName() {
