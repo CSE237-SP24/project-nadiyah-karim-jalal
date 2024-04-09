@@ -87,6 +87,8 @@ public class Menu {
 				System.out.println("Deposit Failed");
 			}
 		}
+		saveAccountData(account);
+	}
 
 	// In progress: Ask the user for their name to be associated with the account
 	public String getUserName() {
@@ -106,7 +108,7 @@ public class Menu {
 		String filename = "files/accountData.txt";
 		Map<String, Double> allAccounts = getAllAccountData();
 
-		// Whatever the account that just did a deposit, now has a new balance
+		// Whatever the account that just did a deposit or withdrawal, now has a new balance
 		allAccounts.put(account.getName(), account.getBalance());
 
 		try (FileWriter writer = new FileWriter(filename, false)) {
