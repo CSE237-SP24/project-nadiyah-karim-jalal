@@ -38,33 +38,29 @@ public class Menu {
 	public void displayingOptions() {
 		boolean continueRunning = true;
 		while (continueRunning) { 
-			System.out.println("Would you like to Deposit (1), Withdraw (2), or Exit (3)? (Enter 1, 2, or 3)");
+			System.out.println("Would you like to Deposit (1), Withdraw (2), Take Loan (3), Loan Payment (4) or Exit (5)? (Enter 1, 2, 3, 4, or 5)");
 			int choice = in.nextInt();
-			while (choice < 1 || choice > 3) {
-			System.out.println("Invalid, please enter 1 for Deposit or 2 for Withdraw, or 3 to Exit.");
-			choice = in.nextInt();
-			}
-
-			if (choice == 3) {
-				System.out.println("Exiting program. Goodbye!");
-				continueRunning = false;
-				continue;  //end the session
-			}
-
-			//Deposit
-			if (choice == 1){
-			System.out.println("How much money do you want to deposit?");
-			}
-			else if (choice == 2){
-			System.out.println("How much money do you want to withdraw?");
-			}
-
-		double amount = getValidUserInput();
-		processingUserSelection(amount, choice != 1);
-		}
-
+		    switch (choice) {
+                case 1:
+                    doDeposit();
+                    break;
+                case 2:
+                    doWithdrawal();
+                    break;
+                case 3:
+                    doTakeLoan();
+                    break;
+                case 4:
+                    doRepayLoan();
+                    break;
+                case 5:
+                    System.out.println("Exiting program. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid, please enter 1 for Deposit or 2 for Withdraw, 3 for Taking Loan, 4 for Repaying, or 5 to Exit.");
+            }
 	}
-	
+
 	//Code that gets user input
 	//No tests needed...for now (probably discuss in future class)
 	public double getValidUserInput() {
@@ -76,29 +72,37 @@ public class Menu {
 		}
 		return amount;
 	}
-	
-	//Does work - needs tests
-	public void processingUserSelection(double amount, boolean actionType) {
-		//Withdraw
-		if (actionType) { 
-			try {
-				account.withdraw(amount);
-				System.out.println("Withdraw Successful. Your balance is now:" + account.getBalance());
-			} catch (IllegalArgumentException e) { 
-				System.out.println("Withdraw Failed");
-			}	
-		} 
-		//Deposit
-		else { 
-			try {
-				account.deposit(amount);
-				System.out.println("Deposit Successful. Your balance is now:" + account.getBalance());
-			} catch (IllegalArgumentException e) { 
-				System.out.println("Deposit Failed");
-			}
-		}
-		saveAccountData(account);
-	}
+   // do deposit
+    private void doDeposit() {
+        System.out.println("How much do you want to deposit? ");
+        double amount = in.nextDouble();
+        account.deposit(amount);
+        System.out.println("Current balance: " + account.getBalance());
+    }
+
+    //do withdrawal
+    private void doWithdrawal() {
+        System.out.println("How much do you want to withdraw? ");
+        double amount = in.nextDouble();
+        account.withdraw(amount);
+        System.out.println("Current balance: " + account.getBalance());
+    }
+
+    //taking out the loan
+    private void doTakeLoan() {
+        System.out.println("What is the loan amount? ");
+        double amount = in.nextDouble();
+        account.takeLoan(amount);
+        System.out.println("Loan taken. Your remaining loan amount is: " + account.getLoanAmount());
+    }
+
+    //repaying a loan
+    private void doRepayLoan() {
+        System.out.println("What is the payment amount? ");
+        double amount = in.nextDouble();
+        account.repayLoan(amount);
+        System.out.println("Loan payment receieved. Your remaining loan amount is: " + account.getLoanAmount());
+    }
 
 	// In progress: Ask the user for their name to be associated with the account
 	public String getUserName() {
