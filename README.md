@@ -1,4 +1,4 @@
-# NJKA Bank Application Project
+# NJKA Bank Application Project :bank:
 ### Team Members:
 **N**adiyah Ahmad, **J**alal Abdul-Yahaya, **K**arim Zaggoti, & **A**nders Pesti
 ### Project Description:
