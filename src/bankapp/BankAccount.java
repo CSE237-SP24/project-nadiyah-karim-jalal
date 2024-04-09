@@ -27,7 +27,7 @@ public class BankAccount {
 		if (amount < 0) { 
 			throw new IllegalArgumentException("Amount must be positive");
 		}
-		this.balance -= amount;
+		// this.balance -= amount; Commenting before I delete, but wouldn't this do the withdrawal twice?
 	}
 	
 	public double withdraw(double amount) { 
