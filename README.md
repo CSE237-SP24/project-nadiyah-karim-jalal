@@ -19,7 +19,7 @@
 - `script.sh` Our script runs the program but has issues accessing our class in our code
 
 **The following are instructions on how to run the program from the command line**
-- We have provided a script (script.sh) that allows users to run our program. You can call this script by using the command ‘./script.sh’. Running this script runs into errors, though, that we plan to address in iteration two.
+- We have provided a script `script.sh` that allows users to run our program. You can call this script by using the command ‘./script.sh’. Running this script runs into errors, though, that we plan to address in iteration two.
 
 ## Iteration Two
 *Wednesday, April 10th, 2024*
@@ -27,7 +27,8 @@
 **We were able to implement the following features during this iteration:**
 - `saveAccountData` Users can create multiple accounts whose information is stored/saved
 - `processingUserSelection` Users should not be able to withdraw and transfer money that they do not have
-
+- `displayingOptions` Users can perform multiple operations in one session
+- `displayingOptions` User can exit the program
 
 **We intend to implement the following features by the next iteration(s):**
 - User can access additional information about their account; specifically what type of account it is and its routing number 
@@ -36,6 +37,6 @@
 - to be continued
 
 **The following are instructions on how to run the program from the command line**
-- `./script.sh` is the command to input to run our program! It works and should prompt user and start the program. 
+- `./script.sh` is the command to input to run our program! It works and should prompt the user and start the program. 
 
 
