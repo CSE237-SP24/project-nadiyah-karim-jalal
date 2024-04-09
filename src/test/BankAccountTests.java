@@ -9,13 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import bankapp.BankAccount;
 
 class BankAccountTests {
-	
-	private BankAccount testAccount;
-	
-	@BeforeEach
-	public void setUp() {
-		testAccount = new BankAccount();
-	}
+	BankAccount testAccount = new BankAccount();
 
 	@Test
 	void testSimpleDeposit() {
@@ -43,6 +37,11 @@ class BankAccountTests {
 	}
 	
 	@Test
+	void testCashOut() {
+		assertEquals(initialBalance, testAccount.cashOut(), 0.01);
+		assertEquals(0, testAccount.getBalance(), 0.01);
+	}
+
 	void testZeroBalance() {
 	
 		//1. set up objects 
@@ -146,5 +145,4 @@ class BankAccountTests {
 //		//3. use assertions to verify results
 //		assertEquals(10.0, balance, 0.01);
 //	}
-
 }
