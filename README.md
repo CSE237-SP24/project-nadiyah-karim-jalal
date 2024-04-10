@@ -26,6 +26,7 @@
 
 **We were able to implement the following features during this iteration:**
 - `saveAccountData` Users can create multiple accounts whose information is stored/saved
+- `getAllAccountData` On start, each user that is saved in the text file is added to a HashMap so users can keep their balance from a previous use of the program
 - `processingUserSelection` Users should not be able to withdraw and transfer money that they do not have
 - `displayingOptions` Users can perform multiple operations in one session
 - `displayingOptions` User can exit the program
