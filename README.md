@@ -34,8 +34,7 @@
 **We intend to implement the following features by the next iteration(s):**
 - User can access additional information about their account; specifically what type of account it is and its routing number 
 
-**The following is/are things that we have implemented but do not currently work**
-- to be continued
+**To our knowledge** we do not have any features that we have implemented but do not currently work
 
 **The following are instructions on how to run the program from the command line**
 - `./script.sh` is the command to input to run our program! It works and should prompt the user and start the program. 
