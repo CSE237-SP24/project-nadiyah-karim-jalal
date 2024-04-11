@@ -32,7 +32,9 @@
 - `displayingOptions` User can exit the program
 
 **We intend to implement the following features by the next iteration(s):**
-- User can access additional information about their account; specifically what type of account it is and its routing number 
+- User can access additional information about their account; specifically what type of account it is and its routing number
+- User can take out loans and repay loans
+- Possible deeper implementation of loans with an interest rate based on time passed 
 
 **To our knowledge** we do not have any features that we have implemented but do not currently work
 
