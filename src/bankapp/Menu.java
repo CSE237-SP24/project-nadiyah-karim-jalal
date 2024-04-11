@@ -64,10 +64,8 @@ public class Menu {
 	//Code that gets user input
 	//No tests needed...for now (probably discuss in future class)
 	public double getValidUserInput() {
-		double amount = in.nextDouble();
 		while(amount < 0) {
-			System.out.println("Invalid value!");
-			System.out.println("How much money do you want to deposit?");
+			System.out.println("Invalid value! Enter a valid amount: ");
 			amount = in.nextDouble();
 		}
 		return amount;
@@ -77,31 +75,39 @@ public class Menu {
         System.out.println("How much do you want to deposit? ");
         double amount = in.nextDouble();
         account.deposit(amount);
+        // getValidUserInput();
         System.out.println("Current balance: " + account.getBalance());
+        saveAccountData(account);
     }
 
     //do withdrawal
     private void doWithdrawal() {
         System.out.println("How much do you want to withdraw? ");
         double amount = in.nextDouble();
+        // getValidUserInput();
         account.withdraw(amount);
         System.out.println("Current balance: " + account.getBalance());
+        saveAccountData(account);
     }
 
     //taking out the loan
     private void doTakeLoan() {
         System.out.println("What is the loan amount? ");
         double amount = in.nextDouble();
+        // getValidUserInput();
         account.takeLoan(amount);
         System.out.println("Loan taken. Your remaining loan amount is: " + account.getLoanAmount());
+        saveAccountData(account);
     }
 
     //repaying a loan
     private void doRepayLoan() {
         System.out.println("What is the payment amount? ");
         double amount = in.nextDouble();
+        // getValidUserInput();
         account.repayLoan(amount);
         System.out.println("Loan payment receieved. Your remaining loan amount is: " + account.getLoanAmount());
+        saveAccountData(account);
     }
 
 	// In progress: Ask the user for their name to be associated with the account
@@ -155,4 +161,29 @@ public class Menu {
 	public BankAccount getAccount() {
 		return account;
 	}
+
+	/*
+	//Does work - needs tests
+	public void processingUserSelection(double amount, boolean actionType) {
+		//Withdraw
+		if (actionType) {
+			try {
+				account.withdraw(amount);
+				System.out.println("Withdraw Successful. Your balance is now:" + account.getBalance());
+			} catch (IllegalArgumentException e) {
+				System.out.println("Withdraw Failed");
+			}
+		}
+		//Deposit
+		else {
+			try {
+				account.deposit(amount);
+				System.out.println("Deposit Successful. Your balance is now:" + account.getBalance());
+			} catch (IllegalArgumentException e) {
+				System.out.println("Deposit Failed");
+			}
+		}
+		saveAccountData(account);
+	}
+	*/
 }
