@@ -34,7 +34,7 @@ class MenuTests {
     @Test
     void testUserDeposit() {
         Menu m = makeNewMenuWithInput("1\n50\n5\n");  // inputs: deposit, 50, exit
-        m.displayOptions();
+        m.displayingOptions();
         assertEquals(50.0, m.getAccount().getBalance(), 0.01);
     }
 
@@ -50,7 +50,7 @@ class MenuTests {
     @Test
     void testTakeLoan() {
         Menu m = makeNewMenuWithInput("3\n75\n5\n");  // inputs: take loan of 75; exit
-        m.displayOptions();
+        m.displayingOptions();
         assertEquals(75.0, m.getAccount().getLoanAmount(), 0.01);
         assertEquals(75.0, m.getAccount().getBalance(), 0.01); //loan amount + 0
     }
@@ -58,7 +58,7 @@ class MenuTests {
     @Test
     void testRepayLoan() {
         Menu m = makeNewMenuWithInput("3\n100\n4\n300\n5\n");  // inputs: take loan of 100; repay 25; exit
-        m.displayOptions();
+        m.displayingOptions();
         assertEquals(0.0, m.getAccount().getLoanAmount(), 0.01);
         assertEquals(1000.0, m.getAccount().getBalance(), 0.01); // no loan left, initial balance restored
     }
