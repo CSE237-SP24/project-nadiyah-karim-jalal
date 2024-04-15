@@ -4,11 +4,13 @@ public class BankAccount {
 	
 	private double balance;
 	private String name;
+	private double loanAmount;
 	
 	//Constructors - not tested
 	public BankAccount(String name, double balance) {
 		this.balance = balance;
 		this.name = name;
+		this.loanAmount = 0;
 	}
 	
 	//public method doing some work - lots of tests
@@ -49,4 +51,24 @@ public class BankAccount {
 	public String getName() {
 		return this.name;
 	}
+
+    //taking loan
+    public void takeLoan(double amount) {
+        if(amount <= 0) {
+            throw new IllegalArgumentException("Loan amount must be positive!");
+        }
+        this.loanAmount += amount;
+        this.balance += amount;
+    }
+
+    //making loan payment
+    public void repayLoan(double amount) {
+        if(amount <= 0 || amount > this.loanAmount) {
+            throw new IllegalArgumentException("Invalid repayment amount!");
+        }
+        this.loanAmount -= amount;
+        this.balance -= amount;
+    }
+
+
 }

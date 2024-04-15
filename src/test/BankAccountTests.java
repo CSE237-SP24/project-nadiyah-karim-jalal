@@ -146,3 +146,34 @@ class BankAccountTests {
 //		assertEquals(10.0, balance, 0.01);
 //	}
 }
+
+    @Test
+    void testTakeLoan() { // balance includes loan
+        testAccount.deposit(100);
+        testAccount.takeLoan(100);
+        assertEquals(100.0, testAccount.getLoanAmount(), 0.01);
+        assertEquals(200.0, testAccount.getBalance(), 0.01);
+    }
+
+    @Test
+    void testRepayLoan() { // balance after repaying part of the loan
+        testAccount.deposit(100);
+        testAccount.takeLoan(100);
+        testAccount.repayLoan(50);
+        assertEquals(50.0, testAccount.getLoanAmount(), 0.01);
+        assertEquals(150.0, testAccount.getBalance(), 0.01);
+    }
+
+    @Test
+    void testRepaymentMoreThanLoan() {
+        testAccount.deposit(100);
+        testAccount.takeLoan(50);
+       try {
+           testAccount.repayLoan(100); // An attempt to repay more than the loan amount
+           fail();
+       } catch (IllegalArgumentException e) {
+           // We expect to end up here, repaying more than the loan is a bad input
+           assertTrue(true);
+       }
+    }
+}
