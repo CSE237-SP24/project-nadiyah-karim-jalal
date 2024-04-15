@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import bankapp.BankAccount;
 
 class BankAccountTests {
-	BankAccount testAccount = new BankAccount();
+	BankAccount testAccount = new BankAccount(null, 0);
 
 	@Test
 	void testSimpleDeposit() {
@@ -110,39 +110,40 @@ class BankAccountTests {
 		assertEquals(260.0, testAccount.getBalance(), 0.01);
 	}
 	
-	//implementing as soon as we add withdraw function
+
 	
-//	@Test 
-//	void testNegativeBalance() {
-//		//1. set up objects
-//		
-//		//2. call method being tested
-//		
-//		testAccount.deposit(25);
-//		testAccount.withdraw(30);
-//		
-//		double balance = testAccount.getBalance();
-//		
-//		//3. use assertions to verify results
-//		assertEquals(-5.0, balance, 0.01);
-//	}
+	@Test 
+	void testNegativeBalance() {
+		//1. set up objects
+		
+		//2. call method being tested
+		
+		testAccount.deposit(25);
+		
+		try {
+			testAccount.withdraw(30);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+		}
+	}
 	
 	
-//	@Test 
-//	void testBalanceAfterMultipleDepositsAndWithdrawl() {
-//		//1. set up objects
-//		
-//		//2. call method being tested
-//		
-//		testAccount.deposit(25);
-//		testAccount.withdraw(30);
-//		testAccount.deposit(125);
-//		testAccount.withdraw(50);
-//		testAccount.withdraw(60);
-//		
-//		double balance = testAccount.getBalance();
-//		
-//		//3. use assertions to verify results
-//		assertEquals(10.0, balance, 0.01);
-//	}
+	@Test 
+	void testBalanceAfterMultipleDepositsAndWithdrawl() {
+		//1. set up objects
+		
+		//2. call method being tested
+		
+		testAccount.deposit(25);
+		testAccount.withdraw(3);
+		testAccount.deposit(125);
+		testAccount.withdraw(15);
+		testAccount.withdraw(60);
+		
+		double balance = testAccount.getBalance();
+		
+		//3. use assertions to verify results
+		assertEquals(72.0, balance, 0.01);
+	}
 }
