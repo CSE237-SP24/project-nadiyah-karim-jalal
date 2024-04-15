@@ -60,10 +60,11 @@ public class Menu {
                     System.out.println("Invalid, please enter 1 for Deposit or 2 for Withdraw, 3 for Taking Loan, 4 for Repaying, or 5 to Exit.");
             }
 	}
-
+	}
+	
 	//Code that gets user input
 	//No tests needed...for now (probably discuss in future class)
-	public double getValidUserInput() {
+	public double getValidUserInput(double amount) {
 		while(amount < 0) {
 			System.out.println("Invalid value! Enter a valid amount: ");
 			amount = in.nextDouble();
@@ -75,7 +76,7 @@ public class Menu {
         System.out.println("How much do you want to deposit? ");
         double amount = in.nextDouble();
         account.deposit(amount);
-        // getValidUserInput();
+        getValidUserInput(amount);
         System.out.println("Current balance: " + account.getBalance());
         saveAccountData(account);
     }
@@ -84,7 +85,7 @@ public class Menu {
     private void doWithdrawal() {
         System.out.println("How much do you want to withdraw? ");
         double amount = in.nextDouble();
-        // getValidUserInput();
+        getValidUserInput(amount);
         account.withdraw(amount);
         System.out.println("Current balance: " + account.getBalance());
         saveAccountData(account);
@@ -94,7 +95,7 @@ public class Menu {
     private void doTakeLoan() {
         System.out.println("What is the loan amount? ");
         double amount = in.nextDouble();
-        // getValidUserInput();
+        getValidUserInput(amount);
         account.takeLoan(amount);
         System.out.println("Loan taken. Your remaining loan amount is: " + account.getLoanAmount());
         saveAccountData(account);
@@ -104,7 +105,7 @@ public class Menu {
     private void doRepayLoan() {
         System.out.println("What is the payment amount? ");
         double amount = in.nextDouble();
-        // getValidUserInput();
+        getValidUserInput(amount);
         account.repayLoan(amount);
         System.out.println("Loan payment receieved. Your remaining loan amount is: " + account.getLoanAmount());
         saveAccountData(account);

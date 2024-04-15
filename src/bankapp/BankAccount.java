@@ -52,6 +52,10 @@ public class BankAccount {
 		return this.name;
 	}
 
+	public double getLoanAmount(){
+		return this.loanAmount;
+	}
+
     //taking loan
     public void takeLoan(double amount) {
         if(amount <= 0) {
