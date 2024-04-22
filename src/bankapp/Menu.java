@@ -13,6 +13,7 @@ public class Menu {
 
 	private Scanner in;
 	private BankAccount account;
+	private Map<String, BankAccount> allAccounts;
 	
 	//not tested
 	public static void main(String[] args) {
@@ -23,14 +24,20 @@ public class Menu {
 	//Constructor
 	public Menu() {
 		this.in = new Scanner(System.in);
-		Map<String, Double> savedAccounts = getAllAccountData();
+		//Load all accounts
+		this.allAccounts = getAllAccountData();
 		String name = getUserName();
-		if (savedAccounts.containsKey(name)) {
+		if (allAccounts.containsKey(name)) {
 			// Already has an account, can use their name and previous balance
-			this.account = new BankAccount(name, savedAccounts.get(name));
+			this.account = allAccounts.get(name);
 		} else {
-			// New account, set balance to 0
-			this.account = new BankAccount(name, 0);
+			//Ask for routing number when account is created 
+			System.out.println("Enter routing number for the new account:");
+			String routingNumber = in.nextLine();
+			// New account, set balance to 0, set routing number
+			this.account = new BankAccount(name, 0, routingNumber);
+			allAccounts.put(name, this.account);
+
 		}
 	}
 	
@@ -38,8 +45,9 @@ public class Menu {
 	public void displayingOptions() {
 		boolean continueRunning = true;
 		while (continueRunning) { 
-			System.out.println("Would you like to Deposit (1), Withdraw (2), Take Loan (3), Loan Payment (4) or Exit (5)? (Enter 1, 2, 3, 4, or 5)");
+			System.out.println("Would you like to Deposit (1), Withdraw (2), Take Loan (3), Loan Payment (4), Transfer(5), or Exit (6)? (Enter the number)");
 			int choice = in.nextInt();
+			in.nextLine();
 		    switch (choice) {
                 case 1:
                     doDeposit();
@@ -53,11 +61,14 @@ public class Menu {
                 case 4:
                     doRepayLoan();
                     break;
-                case 5:
+				case 5:
+					doTransfer();
+					break;
+                case 6:
                     System.out.println("Exiting program. Goodbye!");
                     return;
                 default:
-                    System.out.println("Invalid, please enter 1 for Deposit or 2 for Withdraw, 3 for Taking Loan, 4 for Repaying, or 5 to Exit.");
+                    System.out.println("Invalid selection. Please enter a valid option. ");
             }
 	}
 	}
@@ -78,7 +89,7 @@ public class Menu {
         account.deposit(amount);
         getValidUserInput(amount);
         System.out.println("Current balance: " + account.getBalance());
-        saveAccountData(account);
+        saveAccountData();
     }
 
     //do withdrawal
@@ -88,7 +99,7 @@ public class Menu {
         getValidUserInput(amount);
         account.withdraw(amount);
         System.out.println("Current balance: " + account.getBalance());
-        saveAccountData(account);
+        saveAccountData();
     }
 
     //taking out the loan
@@ -98,7 +109,7 @@ public class Menu {
         getValidUserInput(amount);
         account.takeLoan(amount);
         System.out.println("Loan taken. Your remaining loan amount is: " + account.getLoanAmount());
-        saveAccountData(account);
+        saveAccountData();
     }
 
     //repaying a loan
@@ -108,8 +119,41 @@ public class Menu {
         getValidUserInput(amount);
         account.repayLoan(amount);
         System.out.println("Loan payment receieved. Your remaining loan amount is: " + account.getLoanAmount());
-        saveAccountData(account);
+        saveAccountData();
     }
+
+	//do a transfer
+	private void doTransfer(){
+		System.out.println("Enter the routing number of the account you wish to transfer to:");
+		String routingNumber = in.nextLine();
+		BankAccount recipient = findAccountByRoutingNumber(routingNumber);
+
+		if (recipient == null) {
+			System.out.println("Account not found.");
+			return;
+		}
+
+		System.out.println("Enter the amount to transfer:");
+		double amount = in.nextDouble();
+		in.nextLine();
+		try {
+			account.transfer(recipient, amount);
+			System.out.println("Transfer successful. New balance: " + account.getBalance());
+			saveAccountData();
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	//helper method that will find an account by routing number
+	private BankAccount findAccountByRoutingNumber(String routingNumber) {
+		for (BankAccount acc : allAccounts.values()) {
+			if (acc.getRoutingNumber().equals(routingNumber)) {
+				return acc;
+			}
+		}
+		return null;
+	}
 
 	// In progress: Ask the user for their name to be associated with the account
 	public String getUserName() {
@@ -125,16 +169,12 @@ public class Menu {
 
 	// In progress: Saving account data to a file
 	// Instead of append, after being able to "log back in an account" the entire file is overwritten. A bit clunky but not really a choice without a real database
-	public void saveAccountData(BankAccount account) {
+	private void saveAccountData() {
 		String filename = "files/accountData.txt";
-		Map<String, Double> allAccounts = getAllAccountData();
-
-		// Whatever the account that just did a deposit or withdrawal, now has a new balance
-		allAccounts.put(account.getName(), account.getBalance());
 
 		try (FileWriter writer = new FileWriter(filename, false)) {
-			for (Map.Entry<String, Double> entry : allAccounts.entrySet()) {
-				writer.write(entry.getKey() + ":" + entry.getValue() + "\n");
+			for (BankAccount acc: allAccounts.values()) {
+				writer.write(acc.getName() + ":" + acc.getBalance() + ":" + acc.getRoutingNumber() + "\n");
 			}
 		} catch (IOException e) {
 			System.err.println("Error occured while saving account data: " + e.getMessage());
@@ -142,14 +182,14 @@ public class Menu {
 	}
 	
 	// For now, only worried about getting username with balance for more deposits/withdrawals
-	private Map<String, Double> getAllAccountData() {
+	private Map<String, BankAccount> getAllAccountData() {
 		String filename = "files/accountData.txt";
-		Map<String, Double> allAccounts = new HashMap<>();
+		Map<String, BankAccount> allAccounts = new HashMap<>();
 
 		try {
 			for (String line : Files.readAllLines(Path.of(filename))) {
-				String[] currentAccountDetails = line.split(":");
-				allAccounts.put(currentAccountDetails[0], Double.parseDouble(currentAccountDetails[1]));
+				String[] accountDetails = line.split(":");
+				allAccounts.put(accountDetails[0], new BankAccount(accountDetails[0], Double.parseDouble(accountDetails[1]), accountDetails[2]));
 
 			}
 		} catch (IOException error) {
