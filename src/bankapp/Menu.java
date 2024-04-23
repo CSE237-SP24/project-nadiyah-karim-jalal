@@ -27,15 +27,19 @@ public class Menu {
 		String name = getUserName();
 		if (savedAccounts.containsKey(name)) {
 			// Already has an account, can use their name and previous balance
+			//need to alter this to account for accountType now
 			this.account = new BankAccount(name, savedAccounts.get(name));
 		} else {
-			// New account, set balance to 0
-			this.account = new BankAccount(name, 0);
+			// New account
+			String accountType = getAccountType();
+			//set balance to 0
+			this.account = new BankAccount(name, 0, accountType);
 		}
 	}
 	
 	//Code that just displays stuff - no tests needed
 	public void displayingOptions() {
+		System.out.println("Hello " +  getUserName() + ", we are delighted to welcome you to your NKJA Bank Account.");
 		boolean continueRunning = true;
 		while (continueRunning) { 
 			System.out.println("Would you like to Deposit (1), Withdraw (2), Take Loan (3), Loan Payment (4) or Exit (5)? (Enter 1, 2, 3, 4, or 5)");
@@ -161,6 +165,27 @@ public class Menu {
 	
 	public BankAccount getAccount() {
 		return account;
+	}
+	
+	//for new savings and checking feature
+	public String getAccountType() {
+		System.out.println("Which type of account would you like to open today: Savings (1) or Checking (2)?");
+		int input;
+		String accountType;
+		while (true) {
+			input  = in.nextInt();
+			if (input == 1) {
+				accountType = "savings";
+				break;
+			} else if (input == 2) {
+				accountType = "checking";
+				break;
+			} else {
+				System.out.println("Invalid input! Please enter either 1 for Savings or 2 for Checking");
+			}
+		}
+		
+		return accountType;
 	}
 
 	/*

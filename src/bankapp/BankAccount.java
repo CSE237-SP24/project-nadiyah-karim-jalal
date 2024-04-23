@@ -5,13 +5,22 @@ public class BankAccount {
 	private double balance;
 	private String name;
 	private double loanAmount;
+	private String accountType; 
 	
 	//Constructors - not tested
+	public BankAccount(String name, double balance, String accountType) {
+		this.balance = balance;
+		this.name = name;
+		this.accountType = accountType;
+		this.loanAmount = 0;
+	}
+	
 	public BankAccount(String name, double balance) {
 		this.balance = balance;
 		this.name = name;
 		this.loanAmount = 0;
 	}
+	
 	
 	//public method doing some work - lots of tests
 	public void deposit(double amount) {
@@ -55,6 +64,11 @@ public class BankAccount {
 	public double getLoanAmount(){
 		return this.loanAmount;
 	}
+	
+	public String getAccountType() {
+		return this.accountType;
+	}
+	
 
     //taking loan
     public void takeLoan(double amount) {
