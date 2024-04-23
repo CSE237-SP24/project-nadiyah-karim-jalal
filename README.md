@@ -3,7 +3,7 @@
 **N**adiyah Ahmad, **J**alal Abdul-Yahaya, **K**arim Zaggoti, & **A**nders Pesti
 ### Project Description:
 - to be continued...
-# Iteration One
+## Iteration One
 *Wednesday, March 27th, 2024*
 **We were able to implement the following features during this iteration:**
 - users can deposit money into an account 
