@@ -17,7 +17,7 @@ class MenuTests {
         return new Menu();  //create a new Menu object with the provided input
     }
 
-	/**
+	/*
 	@Test
 	void testUserDeposit() {
 		Menu m = new Menu();
@@ -67,6 +67,7 @@ class MenuTests {
         assertEquals(0.0, m.getAccount().getLoanAmount(), 0.01);
         assertEquals(1000.0, m.getAccount().getBalance(), 0.01); // no loan left, initial balance restored
     }
+    
 
 /*
     @Test
