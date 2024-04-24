@@ -41,4 +41,11 @@
 **The following are instructions on how to run the program from the command line**
 - `./script.sh` is the command to input to run our program! It works and should prompt the user and start the program. 
 
+## Iteration Three
+*Wednesday, April 24th, 2024*
 
+**We were able to implement the following features during this iteration:**
+- Users are able to transfer money to another user's bank account
+- Users are able to take out loans and take them back
+- Users are able to choose between opening a savings account or a checkings account
+- Routing number, account type, and outstanding loan balance are persisted in the text file
