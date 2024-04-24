@@ -110,41 +110,71 @@ class BankAccountTests {
 		assertEquals(260.0, testAccount.getBalance(), 0.01);
 	}
 	
-	//implementing as soon as we add withdraw function
+	@Test 
+	void testNegativeBalance() {
+		//1. set up objects
+
+		//2. call method being tested
+
+		testAccount.deposit(25);
+
+		try {
+			testAccount.withdraw(30);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertTrue(true);
+		}
+	}
 	
-//	@Test 
-//	void testNegativeBalance() {
-//		//1. set up objects
-//		
-//		//2. call method being tested
-//		
-//		testAccount.deposit(25);
-//		testAccount.withdraw(30);
-//		
-//		double balance = testAccount.getBalance();
-//		
-//		//3. use assertions to verify results
-//		assertEquals(-5.0, balance, 0.01);
-//	}
 	
-	
-//	@Test 
-//	void testBalanceAfterMultipleDepositsAndWithdrawl() {
-//		//1. set up objects
-//		
-//		//2. call method being tested
-//		
-//		testAccount.deposit(25);
-//		testAccount.withdraw(30);
-//		testAccount.deposit(125);
-//		testAccount.withdraw(50);
-//		testAccount.withdraw(60);
-//		
-//		double balance = testAccount.getBalance();
-//		
-//		//3. use assertions to verify results
-//		assertEquals(10.0, balance, 0.01);
-//	}
+	@Test 
+	void testBalanceAfterMultipleDepositsAndWithdrawl() {
+		//1. set up objects
+
+		//2. call method being tested
+
+		testAccount.deposit(25);
+		testAccount.withdraw(3);
+		testAccount.deposit(125);
+		testAccount.withdraw(15);
+		testAccount.withdraw(60);
+
+		double balance = testAccount.getBalance();
+
+		//3. use assertions to verify results
+		assertEquals(72.0, balance, 0.01);
+	}
+
+	@Test
+	void testWithdrawalLimit() {
+
+		testAccount.deposit(1000);
+
+		assertThrows(IllegalArgumentException.class, () -> testAccount.withdraw(2000), "Withdrawal exceeds balance");
+	}
+	@Test
+	void testNegativeWithdrawal() {
+
+    assertThrows(IllegalArgumentException.class, () -> testAccount.withdraw(-50), "Can't withdraw negative amounts");
+	}
+
+	@Test
+	void testWithdrawToZero() {
+
+		testAccount.deposit(75);
+		testAccount.withdraw(75);
+
+		assertEquals(0, testAccount.getBalance(), 0.01);
+	}
+
+	@Test
+	void testZeroWithdrawal() {
+
+    	testAccount.deposit(100);
+    	testAccount.withdraw(0);
+
+    	assertEquals(100, testAccount.getBalance(), 0.01);
+	}
 
     @Test
     void testTakeLoan() { // balance includes loan
@@ -174,5 +204,29 @@ class BankAccountTests {
            // We expect to end up here, repaying more than the loan is a bad input
            assertTrue(true);
        }
-    }
+}
+
+	@Test
+	void testSuccessfulTransfer() {
+
+    	BankAccount recipient = new BankAccount("recipient", 100);
+    	testAccount.deposit(200);
+    	testAccount.transfer(recipient, 100);
+
+    	assertEquals(100, testAccount.getBalance(), 0.01);
+    	assertEquals(200, recipient.getBalance(), 0.01);
+	}
+
+	@Test
+	void testTransferWithInsufficientFunds() {
+    	BankAccount recipient = new BankAccount("recipient", 100);
+    	assertThrows(IllegalArgumentException.class, () -> testAccount.transfer(recipient, 200));  //Attempts to transfer more funds than they have 
+	}
+
+	@Test
+	void testTransferNegativeAmount() {
+    	BankAccount recipient = new BankAccount("recipient", 100);
+    	assertThrows(IllegalArgumentException.class, () -> testAccount.transfer(recipient, -100)); //Attempt to transfer a negative amount
+}
+
 }

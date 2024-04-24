@@ -6,6 +6,8 @@ public class BankAccount {
 	private String name;
 	private double loanAmount;
 	private String accountType; 
+	private String routingNumber;
+	private final int routingNumberLengthGenerator = 10000; // Can change lengths
 	
 	//Constructors - not tested
 	public BankAccount(String name, double balance, String accountType) {
@@ -19,6 +21,19 @@ public class BankAccount {
 		this.balance = balance;
 		this.name = name;
 		this.loanAmount = 0;
+		this.routingNumber = generateRoutingNumber();
+		System.out.println("Your routing number is: " + this.routingNumber + ". Make sure to remember it!");
+	}
+
+	public BankAccount(String name, double balance, String routingNumber) {
+		this.balance = balance;
+		this.name = name;
+		this.loanAmount = 0;
+		this.routingNumber = routingNumber;
+	}
+
+	private String generateRoutingNumber() {
+		return String.valueOf((int)(Math.random() * routingNumberLengthGenerator));
 	}
 	
 	
@@ -70,6 +85,14 @@ public class BankAccount {
 	}
 	
 
+	public void setLoanAmount(double loanAmount) {
+		this.loanAmount = loanAmount;
+	}
+
+	public String getRoutingNumber() { 
+		return this.routingNumber;
+	}
+
     //taking loan
     public void takeLoan(double amount) {
         if(amount <= 0) {
@@ -88,5 +111,15 @@ public class BankAccount {
         this.balance -= amount;
     }
 
-
+	//transfer money from sender to recipient
+	public void transfer (BankAccount recipient, double amount) {
+		if(amount <= 0) {
+			throw new IllegalArgumentException("Amount must be positive");
+		}
+		this.validBalance(amount);
+		recipient.deposit(amount);
+		this.balance -= amount;
+	}    
 }
+
+
