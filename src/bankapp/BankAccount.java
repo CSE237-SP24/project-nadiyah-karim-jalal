@@ -133,6 +133,10 @@ public class BankAccount {
 		recipient.deposit(amount);
 		this.balance -= amount;
 	}    
+
+	public String getSavingsOrChecking() {
+		return this.accountType;
+	}
 }
 
 
