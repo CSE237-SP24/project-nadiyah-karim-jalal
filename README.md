@@ -49,3 +49,4 @@
 - Users are able to take out loans and take them back
 - Users are able to choose between opening a savings account or a checkings account
 - Routing number, account type, and outstanding loan balance are persisted in the text file
+- User logging back in must enter their routing number to verify their identity
