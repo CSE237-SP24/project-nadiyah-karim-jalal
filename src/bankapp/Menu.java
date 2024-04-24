@@ -27,9 +27,16 @@ public class Menu {
 		//Load all accounts
 		this.allAccounts = getAllAccountData();
 		String name = getUserName();
+
 		if (allAccounts.containsKey(name)) {
 			// Already has an account, can use their name and previous balance
 			this.account = allAccounts.get(name);
+
+			if (!verifyAccountSecurity()) {
+				System.out.println("Incorrect routing number! Account security verification failed. Exiting program.");
+				System.exit(0);
+			}
+
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			System.out.println("Welcome back, " + this.account.getName() + " to your " + this.account.getAccountType() +  " account! Your balance is: " + this.account.getBalance() + ". And you owe " + this.account.getLoanAmount() + " in loans.");
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -227,5 +234,11 @@ public class Menu {
 		}
 		
 		return accountType;
+	}
+
+	public boolean verifyAccountSecurity() {
+		System.out.println("Please enter your routing number to verify your identity: ");
+		String routingNumber = in.nextLine();
+		return this.account.getRoutingNumber().equals(routingNumber);
 	}
 }
