@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import bankapp.BankAccount;
+import bankapp.Menu;
 
 class BankAccountTests {
 	BankAccount testAccount = new BankAccount("testAccount", 50);
@@ -228,5 +229,15 @@ class BankAccountTests {
     	BankAccount recipient = new BankAccount("recipient", 100);
     	assertThrows(IllegalArgumentException.class, () -> testAccount.transfer(recipient, -100)); //Attempt to transfer a negative amount
 }
+	 @Test
+	    void testSavingsAccountCreation() {
+	    	BankAccount savings = new BankAccount("test", 100.0, "savings", "0001");
+	    	assertTrue(savings.getSavingsOrChecking() == "savings");
+	    }
+	 @Test
+	    void testCheckingAccountCreation() {
+	    	BankAccount savings = new BankAccount("test", 100.0, "checking", "0001");
+	    	assertTrue(savings.getSavingsOrChecking() == "checking");
+	    }
 
 }
