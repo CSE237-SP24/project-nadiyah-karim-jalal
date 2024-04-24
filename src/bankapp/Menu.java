@@ -184,7 +184,7 @@ public class Menu {
 	}
 	
 	// For now, only worried about getting username with balance for more deposits/withdrawals
-	private Map<String, BankAccount> getAllAccountData() {
+	public Map<String, BankAccount> getAllAccountData() {
 		String filename = "files/accountData.txt";
 		Map<String, BankAccount> allAccounts = new HashMap<>();
 		try {

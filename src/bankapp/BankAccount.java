@@ -90,6 +90,22 @@ public class BankAccount {
 		return this.routingNumber;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public void setRoutingNumber(String routingNumber) {
+		this.routingNumber = routingNumber;
+	}
+
     //taking loan
     public void takeLoan(double amount) {
         if(amount <= 0) {
