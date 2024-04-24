@@ -2,7 +2,7 @@
 ### Team Members :busts_in_silhouette: :
 **N**adiyah Ahmad, **J**alal Abdul-Yahaya, **K**arim Zaggoti, & **A**nders Pesti
 ### Project Description:
-- Introducing NJKA Bank, your go-to command-line banking app for effortless financial management. After downloading our repo, and simply launching with `./script.sh`, financial management is at your fingertips. With our intuitive interface, easily create accounts, monitor your account balances, transfer funds between accconts, pay loans, and track expenses anytime, anywhere. Simplify your banking experience with NJKA Bank and take control of your finances with just a few clicks!
+- Introducing NJKA Bank, your go-to command-line banking app for effortless financial management. After downloading our repo, and simply launching with `./script.sh`, financial management is at your fingertips. With our intuitive interface, easily create accounts, monitor your account balances, transfer funds between accounts, pay loans, and track expenses anytime, on any computer. Simplify your banking experience with NJKA Bank and take control of your finances with just a few clicks!
   
 ## Iteration One
 *Wednesday March 27th, 2024*
@@ -48,6 +48,6 @@
 **We were able to implement the following features during this iteration:**
 - Users are able to transfer money to another user's bank account
 - Users are able to take out loans and take them back
-- Users are able to choose between opening a savings account or a checkings account
+- Users are able to choose between opening a savings account or a checking account
 - Routing number, account type, and outstanding loan balance are persisted in the text file
 - User logging back in must enter their routing number to verify their identity
