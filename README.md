@@ -2,7 +2,7 @@
 ### Team Members :busts_in_silhouette: :
 **N**adiyah Ahmad, **J**alal Abdul-Yahaya, **K**arim Zaggoti, & **A**nders Pesti
 ### Project Description:
-- Introducing NJKA Bank, your go-to command-line banking app for effortless financial management. After downloading our repo, and simply launching with `./script.sh`, financial management is at your fingertips. With our intuitive interface, easily create accounts, monitor your account balances, transfer funds, pay loans, and track expenses anytime, anywhere. Simplify your banking experience with NJKA Bank and take control of your finances with just a few clicks!
+- Introducing NJKA Bank, your go-to command-line banking app for effortless financial management. After downloading our repo, and simply launching with `./script.sh`, financial management is at your fingertips. With our intuitive interface, easily create accounts, monitor your account balances, transfer funds between accconts, pay loans, and track expenses anytime, anywhere. Simplify your banking experience with NJKA Bank and take control of your finances with just a few clicks!
   
 ## Iteration One
 *Wednesday March 27th, 2024*
