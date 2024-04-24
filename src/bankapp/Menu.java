@@ -39,11 +39,12 @@ public class Menu {
 	
 	//Code that just displays stuff - no tests needed
 	public void displayingOptions() {
-		System.out.println("Hello " +  getUserName() + ", we are delighted to welcome you to your NKJA Bank Account.");
+		System.out.println("Hello " +  account.getName() + ", we are delighted to welcome you to your NKJA Bank Account.");
 		boolean continueRunning = true;
 		while (continueRunning) { 
 			System.out.println("Would you like to Deposit (1), Withdraw (2), Take Loan (3), Loan Payment (4) or Exit (5)? (Enter 1, 2, 3, 4, or 5)");
 			int choice = in.nextInt();
+			in.nextLine();
 		    switch (choice) {
                 case 1:
                     doDeposit();
@@ -174,6 +175,7 @@ public class Menu {
 		String accountType;
 		while (true) {
 			input  = in.nextInt();
+			in.nextLine();
 			if (input == 1) {
 				accountType = "savings";
 				break;
