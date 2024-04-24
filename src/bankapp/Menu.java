@@ -31,13 +31,9 @@ public class Menu {
 			// Already has an account, can use their name and previous balance
 			this.account = allAccounts.get(name);
 		} else {
-			//Ask for routing number when account is created 
-			System.out.println("Enter routing number for the new account:");
-			String routingNumber = in.nextLine();
-			// New account, set balance to 0, set routing number
-			this.account = new BankAccount(name, 0, routingNumber);
+			// New account, set balance to 0
+			this.account = new BankAccount(name, 0);
 			allAccounts.put(name, this.account);
-
 		}
 	}
 	

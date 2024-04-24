@@ -6,13 +6,26 @@ public class BankAccount {
 	private String name;
 	private double loanAmount;
 	private String routingNumber;
+	private final int routingNumberLengthGenerator = 10000; // Can change lengths
 	
 	//Constructors - not tested
+	public BankAccount(String name, double balance) {
+		this.balance = balance;
+		this.name = name;
+		this.loanAmount = 0;
+		this.routingNumber = generateRoutingNumber();
+		System.out.println("Your routing number is: " + this.routingNumber + ". Make sure to remember it!");
+	}
+
 	public BankAccount(String name, double balance, String routingNumber) {
 		this.balance = balance;
 		this.name = name;
 		this.loanAmount = 0;
 		this.routingNumber = routingNumber;
+	}
+
+	private String generateRoutingNumber() {
+		return String.valueOf((int)(Math.random() * routingNumberLengthGenerator));
 	}
 	
 	//public method doing some work - lots of tests
