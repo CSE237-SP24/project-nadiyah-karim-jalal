@@ -28,18 +28,21 @@ public class Menu {
 		this.allAccounts = getAllAccountData();
 		String name = getUserName();
 		if (allAccounts.containsKey(name)) {
-			// Already has an account, can use their name and previous balance
-			this.account = allAccounts.get(name);
+      // Already has an account, can use their name and previous balance
+      this.account = allAccounts.get(name);
 			System.out.println("Welcome back, " + this.account.getName() + "! Your balance is: " + this.account.getBalance() + ". And you owe " + this.account.getLoanAmount() + " in loans.");
 		} else {
-			// New account, set balance to 0
-			this.account = new BankAccount(name, 0);
-			allAccounts.put(name, this.account);
-		}
+			// New account
+			String accountType = getAccountType();
+			//set balance to 0
+			this.account = new BankAccount(name, 0, accountType);
+      allAccounts.put(name, this.account);
+		} 
 	}
 	
 	//Code that just displays stuff - no tests needed
 	public void displayingOptions() {
+		System.out.println("Hello " +  account.getName() + ", we are delighted to welcome you to your NKJA Bank Account.");
 		boolean continueRunning = true;
 		while (continueRunning) { 
 			System.out.println("Would you like to Deposit (1), Withdraw (2), Take Loan (3), Loan Payment (4), Transfer(5), or Exit (6)? (Enter the number)");
@@ -202,29 +205,26 @@ public class Menu {
 	public BankAccount getAccount() {
 		return account;
 	}
-
-	/*
-	//Does work - needs tests
-	public void processingUserSelection(double amount, boolean actionType) {
-		//Withdraw
-		if (actionType) {
-			try {
-				account.withdraw(amount);
-				System.out.println("Withdraw Successful. Your balance is now:" + account.getBalance());
-			} catch (IllegalArgumentException e) {
-				System.out.println("Withdraw Failed");
+	
+	//for new savings and checking feature
+	public String getAccountType() {
+		System.out.println("Which type of account would you like to open today: Savings (1) or Checking (2)?");
+		int input;
+		String accountType;
+		while (true) {
+			input  = in.nextInt();
+			in.nextLine();
+			if (input == 1) {
+				accountType = "savings";
+				break;
+			} else if (input == 2) {
+				accountType = "checking";
+				break;
+			} else {
+				System.out.println("Invalid input! Please enter either 1 for Savings or 2 for Checking");
 			}
 		}
-		//Deposit
-		else {
-			try {
-				account.deposit(amount);
-				System.out.println("Deposit Successful. Your balance is now:" + account.getBalance());
-			} catch (IllegalArgumentException e) {
-				System.out.println("Deposit Failed");
-			}
-		}
-		saveAccountData(account);
+		
+		return accountType;
 	}
-	*/
 }

@@ -5,10 +5,18 @@ public class BankAccount {
 	private double balance;
 	private String name;
 	private double loanAmount;
+	private String accountType; 
 	private String routingNumber;
 	private final int routingNumberLengthGenerator = 10000; // Can change lengths
 	
 	//Constructors - not tested
+	public BankAccount(String name, double balance, String accountType) {
+		this.balance = balance;
+		this.name = name;
+		this.accountType = accountType;
+		this.loanAmount = 0;
+	}
+	
 	public BankAccount(String name, double balance) {
 		this.balance = balance;
 		this.name = name;
@@ -27,6 +35,7 @@ public class BankAccount {
 	private String generateRoutingNumber() {
 		return String.valueOf((int)(Math.random() * routingNumberLengthGenerator));
 	}
+	
 	
 	//public method doing some work - lots of tests
 	public void deposit(double amount) {
@@ -70,6 +79,11 @@ public class BankAccount {
 	public double getLoanAmount(){
 		return this.loanAmount;
 	}
+	
+	public String getAccountType() {
+		return this.accountType;
+	}
+	
 
 	public void setLoanAmount(double loanAmount) {
 		this.loanAmount = loanAmount;
