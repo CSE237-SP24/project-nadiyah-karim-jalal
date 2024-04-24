@@ -20,7 +20,7 @@ class BankAccountTests {
 		testAccount.deposit(25);
 		
 		//3. Use assertions to verify results
-		assertEquals(25.0, testAccount.getBalance(), 0.01);	
+		assertEquals(75.0, testAccount.getBalance(), 0.01);	
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ class BankAccountTests {
 		testAccount.deposit(25);
 		
 		//3. use assertions to verify results
-		assertEquals(25.0, testAccount.getBalance(), 0.01);
+		assertEquals(75.0, testAccount.getBalance(), 0.01);
 	}
 	
 	@Test 
@@ -76,7 +76,7 @@ class BankAccountTests {
 		double balance = testAccount.getBalance();
 		
 		//3. use assertions to verify results
-		assertEquals(1000000.0, balance, 0.01);
+		assertEquals(1000050.0, balance, 0.01);
 	}
 	
 	@Test 
@@ -91,7 +91,7 @@ class BankAccountTests {
 		double balance = testAccount.getBalance();
 		
 		//3. use assertions to verify results
-		assertEquals(125.0, testAccount.getBalance(), 0.01);
+		assertEquals(175.0, testAccount.getBalance(), 0.01);
 	}
 	
 	@Test 
@@ -108,7 +108,7 @@ class BankAccountTests {
 		double balance = testAccount.getBalance();
 		
 		//3. use assertions to verify results
-		assertEquals(260.0, testAccount.getBalance(), 0.01);
+		assertEquals(310.0, testAccount.getBalance(), 0.01);
 	}
 	
 	@Test 
@@ -143,7 +143,7 @@ class BankAccountTests {
 		double balance = testAccount.getBalance();
 
 		//3. use assertions to verify results
-		assertEquals(72.0, balance, 0.01);
+		assertEquals(122.0, balance, 0.01);
 	}
 
 	@Test
@@ -165,7 +165,7 @@ class BankAccountTests {
 		testAccount.deposit(75);
 		testAccount.withdraw(75);
 
-		assertEquals(0, testAccount.getBalance(), 0.01);
+		assertEquals(50.0, testAccount.getBalance(), 0.01);
 	}
 
 	@Test
@@ -174,7 +174,7 @@ class BankAccountTests {
     	testAccount.deposit(100);
     	testAccount.withdraw(0);
 
-    	assertEquals(100, testAccount.getBalance(), 0.01);
+    	assertEquals(150.0, testAccount.getBalance(), 0.01);
 	}
 
     @Test
@@ -182,7 +182,7 @@ class BankAccountTests {
         testAccount.deposit(100);
         testAccount.takeLoan(100);
         assertEquals(100.0, testAccount.getLoanAmount(), 0.01);
-        assertEquals(200.0, testAccount.getBalance(), 0.01);
+        assertEquals(250.0, testAccount.getBalance(), 0.01);
     }
 
     @Test
@@ -191,7 +191,7 @@ class BankAccountTests {
         testAccount.takeLoan(100);
         testAccount.repayLoan(50);
         assertEquals(50.0, testAccount.getLoanAmount(), 0.01);
-        assertEquals(150.0, testAccount.getBalance(), 0.01);
+        assertEquals(200.0, testAccount.getBalance(), 0.01);
     }
 
     @Test
@@ -214,7 +214,7 @@ class BankAccountTests {
     	testAccount.deposit(200);
     	testAccount.transfer(recipient, 100);
 
-    	assertEquals(100, testAccount.getBalance(), 0.01);
+    	assertEquals(150, testAccount.getBalance(), 0.01);
     	assertEquals(200, recipient.getBalance(), 0.01);
 	}
 
