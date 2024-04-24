@@ -146,4 +146,37 @@ class BankAccountTests {
 		//3. use assertions to verify results
 		assertEquals(72.0, balance, 0.01);
 	}
+
+	@Test
+	void testWithdrawalLimit() {
+
+		testAccount.deposit(1000);
+
+		assertThrows(IllegalArgumentException.class, () -> testAccount.withdraw(2000), "Withdrawal exceeds balance");
+	}
+	@Test
+	void testNegativeWithdrawal() {
+
+    assertThrows(IllegalArgumentException.class, () -> testAccount.withdraw(-50), "Can't withdraw negative amounts");
+	}
+
+	@Test
+	void testWithdrawToZero() {
+
+		testAccount.deposit(75);
+		testAccount.withdraw(75);
+
+		assertEquals(0, testAccount.getBalance(), 0.01);
+	}
+
+	@Test
+	void testZeroWithdrawal() {
+
+    	testAccount.deposit(100);
+    	testAccount.withdraw(0);
+
+    	assertEquals(100, testAccount.getBalance(), 0.01);
+}
+
+
 }
