@@ -30,6 +30,7 @@ public class Menu {
 		if (allAccounts.containsKey(name)) {
 			// Already has an account, can use their name and previous balance
 			this.account = allAccounts.get(name);
+			System.out.println("Welcome back, " + this.account.getName() + "! Your balance is: " + this.account.getBalance() + ". And you owe " + this.account.getLoanAmount() + " in loans.");
 		} else {
 			// New account, set balance to 0
 			this.account = new BankAccount(name, 0);
@@ -170,7 +171,7 @@ public class Menu {
 
 		try (FileWriter writer = new FileWriter(filename, false)) {
 			for (BankAccount acc: allAccounts.values()) {
-				writer.write(acc.getName() + ":" + acc.getBalance() + ":" + acc.getRoutingNumber() + "\n");
+				writer.write(acc.getName() + ":" + acc.getBalance() + ":" + acc.getRoutingNumber() + ":" + acc.getLoanAmount() + "\n");
 			}
 		} catch (IOException e) {
 			System.err.println("Error occured while saving account data: " + e.getMessage());
@@ -185,8 +186,11 @@ public class Menu {
 		try {
 			for (String line : Files.readAllLines(Path.of(filename))) {
 				String[] accountDetails = line.split(":");
-				allAccounts.put(accountDetails[0], new BankAccount(accountDetails[0], Double.parseDouble(accountDetails[1]), accountDetails[2]));
-
+				BankAccount account = new BankAccount(accountDetails[0], Double.parseDouble(accountDetails[1]), accountDetails[2]);
+				if (Double.parseDouble(accountDetails[3]) > 0) {
+					account.setLoanAmount(Double.parseDouble(accountDetails[3]));
+				}
+				allAccounts.put(accountDetails[0], account);
 			}
 		} catch (IOException error) {
 			System.out.println("Error occurred while reading account data: " + error.getMessage());

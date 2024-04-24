@@ -71,6 +71,10 @@ public class BankAccount {
 		return this.loanAmount;
 	}
 
+	public void setLoanAmount(double loanAmount) {
+		this.loanAmount = loanAmount;
+	}
+
 	public String getRoutingNumber() { 
 		return this.routingNumber;
 	}
@@ -101,10 +105,7 @@ public class BankAccount {
 		this.validBalance(amount);
 		recipient.deposit(amount);
 		this.balance -= amount;
-	}
-    
-
-
+	}    
 }
 
 
