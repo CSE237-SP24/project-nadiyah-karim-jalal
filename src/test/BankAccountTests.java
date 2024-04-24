@@ -204,5 +204,29 @@ class BankAccountTests {
            // We expect to end up here, repaying more than the loan is a bad input
            assertTrue(true);
        }
-    }
+}
+
+	@Test
+	void testSuccessfulTransfer() {
+
+    	BankAccount recipient = new BankAccount("recipient", 100);
+    	testAccount.deposit(200);
+    	testAccount.transfer(recipient, 100);
+
+    	assertEquals(100, testAccount.getBalance(), 0.01);
+    	assertEquals(200, recipient.getBalance(), 0.01);
+	}
+
+	@Test
+	void testTransferWithInsufficientFunds() {
+    	BankAccount recipient = new BankAccount("recipient", 100);
+    	assertThrows(IllegalArgumentException.class, () -> testAccount.transfer(recipient, 200));  //Attempts to transfer more funds than they have 
+	}
+
+	@Test
+	void testTransferNegativeAmount() {
+    	BankAccount recipient = new BankAccount("recipient", 100);
+    	assertThrows(IllegalArgumentException.class, () -> testAccount.transfer(recipient, -100)); //Attempt to transfer a negative amount
+}
+
 }
