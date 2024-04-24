@@ -51,3 +51,5 @@
 - Users are able to choose between opening a savings account or a checking account
 - Routing number, account type, and outstanding loan balance are persisted in the text file
 - User logging back in must enter their routing number to verify their identity
+
+**To our knowledge** we do not have any features that we have implemented but do not currently work
