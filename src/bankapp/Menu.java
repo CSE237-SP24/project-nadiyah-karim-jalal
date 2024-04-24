@@ -28,15 +28,17 @@ public class Menu {
 		this.allAccounts = getAllAccountData();
 		String name = getUserName();
 		if (allAccounts.containsKey(name)) {
-      // Already has an account, can use their name and previous balance
-      this.account = allAccounts.get(name);
-			System.out.println("Welcome back, " + this.account.getName() + "! Your balance is: " + this.account.getBalance() + ". And you owe " + this.account.getLoanAmount() + " in loans.");
+			// Already has an account, can use their name and previous balance
+			this.account = allAccounts.get(name);
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("Welcome back, " + this.account.getName() + " to your " + this.account.getAccountType() +  " account! Your balance is: " + this.account.getBalance() + ". And you owe " + this.account.getLoanAmount() + " in loans.");
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		} else {
 			// New account
 			String accountType = getAccountType();
 			//set balance to 0
-			this.account = new BankAccount(name, 0, accountType);
-      allAccounts.put(name, this.account);
+			this.account = new BankAccount(name, 0, accountType, null);
+      		allAccounts.put(name, this.account);
 		} 
 	}
 	
@@ -174,7 +176,7 @@ public class Menu {
 
 		try (FileWriter writer = new FileWriter(filename, false)) {
 			for (BankAccount acc: allAccounts.values()) {
-				writer.write(acc.getName() + ":" + acc.getBalance() + ":" + acc.getRoutingNumber() + ":" + acc.getLoanAmount() + "\n");
+				writer.write(acc.getName() + ":" + acc.getBalance() + ":" + acc.getRoutingNumber() + ":" + acc.getAccountType() + ":" + acc.getLoanAmount() + "\n");
 			}
 		} catch (IOException e) {
 			System.err.println("Error occured while saving account data: " + e.getMessage());
@@ -185,13 +187,12 @@ public class Menu {
 	private Map<String, BankAccount> getAllAccountData() {
 		String filename = "files/accountData.txt";
 		Map<String, BankAccount> allAccounts = new HashMap<>();
-
 		try {
 			for (String line : Files.readAllLines(Path.of(filename))) {
 				String[] accountDetails = line.split(":");
-				BankAccount account = new BankAccount(accountDetails[0], Double.parseDouble(accountDetails[1]), accountDetails[2]);
-				if (Double.parseDouble(accountDetails[3]) > 0) {
-					account.setLoanAmount(Double.parseDouble(accountDetails[3]));
+				BankAccount account = new BankAccount(accountDetails[0], Double.parseDouble(accountDetails[1]), accountDetails[3], accountDetails[2]);
+				if (Double.parseDouble(accountDetails[4]) > 0) {
+					account.setLoanAmount(Double.parseDouble(accountDetails[4]));
 				}
 				allAccounts.put(accountDetails[0], account);
 			}
